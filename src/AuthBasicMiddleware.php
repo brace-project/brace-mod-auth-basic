@@ -25,12 +25,12 @@ class AuthBasicMiddleware extends BraceAbstractMiddleware
             throw new AuthorizationRequiredException();
         }));
 
-        $userInfo = $request->getUri()->getUserInfo();
-        if ($userInfo !== "") {
-            $parts = explode(":", $userInfo, 2);
+        $serverParams = $request->getServerParams();
+
+        if (isset ($serverParams["PHP_AUTH_USER"])) {
             $basicAuthToken = new BasicAuthToken([
-                "user" => $parts[0],
-                "passwd" => $parts[1] ?? null
+                "user" => $serverParams["PHP_AUTH_USER"],
+                "passwd" => $serverParams["PHP_AUTH_PW"] ?? null
             ]);
             $this->app->define("basicAuthToken", new DiValue($basicAuthToken));
         }
@@ -41,7 +41,7 @@ class AuthBasicMiddleware extends BraceAbstractMiddleware
         } catch (AuthorizationRequiredException $ex) {
             // Request authentication if not present
             return new TextResponse("401 Authentication required", 401, [
-                "WWW-Authenticate" => "Basic realm=\"My Realm\""
+                "WWW-Authenticate" => "Basic realm=\"\""
             ]);
         }
 
