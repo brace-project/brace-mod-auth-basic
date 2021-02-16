@@ -41,7 +41,8 @@ class AuthBasicMiddleware extends BraceAbstractMiddleware
         } catch (AuthorizationRequiredException $ex) {
             // Request authentication if not present
             return new TextResponse("401 Authentication required", 401, [
-                "WWW-Authenticate: Basic realm=\"My Realm\""]);
+                "WWW-Authenticate" => "Basic realm=\"My Realm\""
+            ]);
         }
 
     }
