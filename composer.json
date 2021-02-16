@@ -1,0 +1,39 @@
+{
+    "name": "brace/mod-auth-basic",
+    "type": "project",
+    "description": "Http Basic authentication",
+    "keywords": ["Phore", "Dependency Injection", "Di"],
+    "homepage": "https://infracamp.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Leuffen",
+            "email": "matthes@leuffen.de"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "brace/core": "*"
+    },
+
+    "require-dev": {
+        "brace/mod-request-laminas": "*",
+        "phore/tester": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Brace\\Auth\\Basic\\": "src"
+        },
+        "files": [
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+        }
+    }
+}
