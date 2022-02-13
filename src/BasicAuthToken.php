@@ -16,4 +16,9 @@ use Brace\Core\Helper\Immutable;
 class BasicAuthToken extends Immutable
 {
 
+    public function validate()
+    {
+        if ($this->user === null)
+            throw new AuthorizationRequiredException("No baisc auth user present");
+    }
 }
