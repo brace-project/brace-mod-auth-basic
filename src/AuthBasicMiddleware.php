@@ -20,7 +20,7 @@ class AuthBasicMiddleware extends BraceAbstractMiddleware
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // Default: Throw Authorization Required Exception and catch it in the middleware
+        // Default: Return empty user (validate() will throw AuthRequired Exception)
         $this->app->define("basicAuthToken", new DiValue(new BasicAuthToken([
                 "user" => null,
                 "passwd" => null
