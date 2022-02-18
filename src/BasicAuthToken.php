@@ -12,6 +12,8 @@ use Brace\Core\Helper\Immutable;
  *
  * @property-read string $user
  * @property-read string|null $passwd
+ * @property-read bool $valid
+ * @property-read bool $hasCredentials
  */
 class BasicAuthToken extends Immutable
 {
@@ -19,6 +21,9 @@ class BasicAuthToken extends Immutable
     public function validate()
     {
         if ($this->user === null)
-            throw new AuthorizationRequiredException("No baisc auth user present");
+            throw new AuthorizationRequiredException("No basic auth user present");
+        if ($this->valid !== true)
+            throw new AuthorizationRequiredException("Basic authentication invalid");
     }
+
 }
