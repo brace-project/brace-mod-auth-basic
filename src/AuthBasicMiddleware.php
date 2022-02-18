@@ -17,7 +17,7 @@ class AuthBasicMiddleware extends BraceAbstractMiddleware
 
 
     public function __construct(
-        private \Closure|null $validator=null
+        private AuthValidatorInterface|null $validator=null
     ){}
 
 
@@ -43,25 +43,11 @@ class AuthBasicMiddleware extends BraceAbstractMiddleware
                     "hasCredentials" => true
                 ]);
                 if ($this->validator !== null) {
-                    $return = phore_di_call($this->validator, $this->app, [
-                        "basicAuthToken" => $basicAuthToken
-                    ]);
-                    if ( ! is_bool($return))
-                        throw new \InvalidArgumentException("BasicAuthMiddleware: Validator Closure must return boolean value");
-                    if ($return === true) {
-                        $basicAuthToken = new BasicAuthToken([
-                            "user" => $basicAuthToken->user,
-                            "passwd" => $basicAuthToken->passwd,
-                            "valid" => true,
-                            "hasCredentials" => true
-                        ]);
-                    }
+                    $basicAuthToken = $this->validator->validate($basicAuthToken, $this->app);
                     $basicAuthToken->validate();
                 }
                 $this->app->define("basicAuthToken", new DiValue($basicAuthToken));
             }
-
-            // Catch the exception if authtoken was requested somewhere
 
             return $handler->handle($request);
         } catch (AuthorizationRequiredException $ex) {

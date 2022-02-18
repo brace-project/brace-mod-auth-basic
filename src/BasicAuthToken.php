@@ -14,6 +14,8 @@ use Brace\Core\Helper\Immutable;
  * @property-read string|null $passwd
  * @property-read bool $valid
  * @property-read bool $hasCredentials
+ * @property-read string[] $scopes
+ * @property-read array $meta
  */
 class BasicAuthToken extends Immutable
 {

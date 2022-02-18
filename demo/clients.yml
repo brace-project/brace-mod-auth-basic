@@ -1,0 +1,14 @@
+clients:
+  - client_id: client1
+    active: true
+    scopes: ["read", "write"]
+    meta: ["some", "metadata"]
+    access_secrets:
+      - '$6$dUu0MknVF75xYa9T$50bYZ.rjvRfGJGskUJ2tEj0wdkMb.BK/rZwndIFFB.isjjtdCLcC54IitrXR3nyYRChNFTJ9AqAqsPwoAy3LW.'  # test
+
+  - client_id: client2
+    active: true
+    scopes: [ "read", "write" ]
+    meta: [ "some", "metadata" ]
+    access_secrets:
+      - '$6$dUu0MknVF75xYa9T$50bYZ.rjvRfGJGskUJ2tEj0wdkMb.BK/rZwndIFFB.isjjtdCLcC54IitrXR3nyYRChNFTJ9AqAqsPwoAy3LW.'  # test
