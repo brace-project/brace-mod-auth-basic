@@ -17,7 +17,8 @@ class AuthBasicMiddleware extends BraceAbstractMiddleware
 
 
     public function __construct(
-        private AuthValidatorInterface|null $validator=null
+        private AuthValidatorInterface|null $validator=null,
+        private bool $required = false
     ){}
 
 
@@ -47,6 +48,9 @@ class AuthBasicMiddleware extends BraceAbstractMiddleware
                     $basicAuthToken->validate();
                 }
                 $this->app->define("basicAuthToken", new DiValue($basicAuthToken));
+            } else {
+                if ($this->required)
+                    throw new AuthorizationRequiredException("Authorization is required for this endpoint");
             }
 
             return $handler->handle($request);

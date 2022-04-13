@@ -17,12 +17,13 @@ class ClientIdFileAuthValidator implements AuthValidatorInterface
     private $file;
 
     public function __construct(string $file) {
-        $this->file = phore_file($file)->assertFile();
+        $this->file = phore_file($file);
     }
 
 
     public function validate(BasicAuthToken $basicAuthToken, BraceApp $app): BasicAuthToken
     {
+        $this->file->assertFile();
         $authConfig = $this->file->get_yaml(TAuthConfig::class);
         assert($authConfig instanceof TAuthConfig);
 
