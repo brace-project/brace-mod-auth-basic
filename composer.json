@@ -16,9 +16,7 @@
         "brace/core": "*"
     },
 
-    "files": [
-        "src/functions.inc.php"
-    ],
+
     "require-dev": {
         "brace/mod-request-laminas": "*",
         "phore/tester": "*"
@@ -28,6 +26,7 @@
             "Brace\\Auth\\Basic\\": "src"
         },
         "files": [
+            "src/functions.inc.php"
         ]
     },
     "autoload-dev": {
