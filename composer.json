@@ -16,6 +16,9 @@
         "brace/core": "*"
     },
 
+    "files": [
+        "src/functions.inc.php"
+    ],
     "require-dev": {
         "brace/mod-request-laminas": "*",
         "phore/tester": "*"

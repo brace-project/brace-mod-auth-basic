@@ -51,12 +51,7 @@ use Psr\Http\Server\RequestHandlerInterface;
     ) {
         if ($this->authenticator === null && $this->allowUsers !== null) {
             $this->authenticator = function (BasicAuthToken $authToken) : bool {
-                foreach ($this->allowUsers as $user) {
-                    [$username, $passwd] = explode(":", $user, 2);
-                    if ($username === $authToken->user && crypt($authToken->passwd, $passwd) === $passwd)
-                        return true;
-                }
-                return false;
+                return validate_auth($authToken->user, $authToken->passwd, $this->allowUsers);
             };
         }
         if ($this->authenticator === null && $this->allowUsers === null)
