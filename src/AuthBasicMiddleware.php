@@ -17,9 +17,13 @@ class AuthBasicMiddleware extends BraceAbstractMiddleware
 
 
     public function __construct(
-        private AuthValidatorInterface|null $validator=null,
+        private AuthValidatorInterface|\Closure|null $validator=null,
         private bool $required = false
-    ){}
+    ){
+        if ($validator instanceof \Closure) {
+            $this->validator = new Validator\LambdaAuthValidator($validator);
+        }
+    }
 
 
 
