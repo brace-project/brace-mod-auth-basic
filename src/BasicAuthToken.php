@@ -31,6 +31,7 @@ class BasicAuthToken extends Immutable
     public function validatePasswordHash(string $hash) {
         if ( ! password_verify($this->passwd, $hash))
             throw new AuthorizationRequiredException("Invalid password");
+     
     }
 
 }
